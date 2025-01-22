@@ -1,7 +1,7 @@
 package controller;
 
 import java.util.function.Supplier;
-import verify.LottoPrice;
+import verify.LottoCount;
 import view.InputView;
 
 public class LottoController {
@@ -18,13 +18,13 @@ public class LottoController {
     }
 
     public void run() {
-        LottoPrice lottoPrice = inputPrice();
+        LottoCount lottoCount = inputPrice();
     }
 
-    private LottoPrice inputPrice() {
+    private LottoCount inputPrice() {
         return handleRetryOnError(() -> {
             String input = inputView.input(InputView.LOTTO_PRICE);
-            return LottoPrice.from(input);
+            return LottoCount.from(input);
         });
     }
 
