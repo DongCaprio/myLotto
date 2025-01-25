@@ -34,7 +34,7 @@ public enum LottoRank {
             long count = lottoRanks.stream()
                     .filter(rank -> rank == lottoRank)
                     .count();
-            System.out.println(ranks[i].makePrintMessage(count));
+            System.out.println(lottoRank.makePrintMessage(count));
         }
     }
 }
