@@ -28,6 +28,7 @@ public enum LottoRank {
     }
 
     public static void printMessage(List<LottoRank> lottoRanks) {
+        System.out.printf("%n당첨 통계%n---%n");
         LottoRank[] ranks = LottoRank.values();
         for (int i = ranks.length - 1; i >= 0; i--) {
             LottoRank lottoRank = ranks[i];
