@@ -2,8 +2,8 @@ package lotto;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import custom.CustomException;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -15,8 +15,9 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) { //수동로또를 위해 public 으로 선언
         validate(numbers);
-        Collections.sort(numbers);
-        this.numbers = numbers;
+        this.numbers = numbers.stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     public static void validate(List<Integer> numbers) {
