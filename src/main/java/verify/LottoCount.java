@@ -6,7 +6,7 @@ public class LottoCount {
 
     private final int lottoCount;
 
-    private static final int ONE_LOTTO_PRICE = 1000;
+    public static final int ONE_LOTTO_PRICE = 1000;
 
     public LottoCount(int lottoPrice) {
         this.lottoCount = lottoPrice;
