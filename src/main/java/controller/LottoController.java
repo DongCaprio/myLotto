@@ -1,10 +1,15 @@
 package controller;
 
+import static verify.LottoCount.ONE_LOTTO_PRICE;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 import lotto.BonusNumber;
 import lotto.Lotto;
+import lotto.LottoRank;
 import lotto.WinningInfo;
 import lotto.WinningNumber;
 import verify.LottoCount;
@@ -19,20 +24,49 @@ public class LottoController {
     private <T> T handleRetryOnError(Supplier<T> method) {
         try {
             return method.get();
-        } catch (RuntimeException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return handleRetryOnError(method);
         }
     }
 
     public void run() {
-        LottoCount lottoCount = inputPrice();
-        outputView.printLottoCount(lottoCount.getLottoCount());
-        List<Lotto> lottos = makeLottos(lottoCount.getLottoCount());
+        int lottoCount = inputPrice().getLottoCount();
+        outputView.printLottoCount(lottoCount);
+        List<Lotto> lottos = makeLottos(lottoCount);
+        printLottos(lottos);
+        WinningInfo winningInfo = makeWinningInfo(inputWinningNumber());
+        List<LottoRank> lottoRanks = getLottoRanks(lottos, winningInfo);
+        LottoRank.printMessage(lottoRanks);
+        calculateRateOfReturn(lottoRanks, lottoCount);
+    }
+
+    private void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             outputView.println(lotto.toString());
         }
-        WinningInfo winningInfo = WinningInfo.from(inputWinningNumber(), inputBonusNumber());
+    }
+
+    private List<LottoRank> getLottoRanks(List<Lotto> lottos, WinningInfo winningInfo) {
+        return lottos.stream()
+                .map(winningInfo::specifyLottoRank)
+                .filter(Objects::nonNull)
+                .toList();
+    }
+
+    private void calculateRateOfReturn(List<LottoRank> lottoRanks, int lottoCount) {
+        double totalMoney = lottoRanks.stream()
+                .mapToDouble(LottoRank::getPrizeMoney)
+                .sum();
+        double rateReturn = totalMoney / (ONE_LOTTO_PRICE * lottoCount) * 100;
+        DecimalFormat df = new DecimalFormat("#.##");
+        System.out.printf("총 수익률은 %s%%입니다.%n", df.format(rateReturn));
+    }
+
+    private WinningInfo makeWinningInfo(WinningNumber winningNumber) {
+        return handleRetryOnError(() -> {
+            return WinningInfo.from(winningNumber, inputBonusNumber());
+        });
     }
 
     private LottoCount inputPrice() {
