@@ -38,4 +38,8 @@ public enum LottoRank {
             System.out.println(lottoRank.makePrintMessage(count));
         }
     }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
 }
