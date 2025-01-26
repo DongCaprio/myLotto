@@ -23,7 +23,7 @@ public class BonusNumber {
             return bonus;
         } catch (NumberFormatException e) {
             throw new CustomException("알맞은 숫자를 입력해주세요");
-        } catch (IllegalArgumentException e) {
+        } catch (CustomException e) {
             throw new IllegalArgumentException(e.getMessage());
         }
     }

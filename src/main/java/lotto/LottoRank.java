@@ -20,7 +20,7 @@ public enum LottoRank {
         this.matchCount = matchCount;
     }
 
-    public String makePrintMessage(long count) {
+    private String makePrintMessage(long count) {
         if (this == SECOND) {
             return String.format("%d개 일치%s (%,d원) - %d개", matchCount, SECOND_MSG, prizeMoney, count);
         }
