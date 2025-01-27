@@ -8,7 +8,7 @@ public class LottoCount {
 
     public static final int ONE_LOTTO_PRICE = 1000;
 
-    public LottoCount(int lottoPrice) {
+    private LottoCount(int lottoPrice) {
         this.lottoCount = lottoPrice;
     }
 

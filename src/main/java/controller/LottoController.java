@@ -64,9 +64,7 @@ public class LottoController {
     }
 
     private WinningInfo makeWinningInfo(WinningNumber winningNumber) {
-        return handleRetryOnError(() -> {
-            return WinningInfo.from(winningNumber, inputBonusNumber());
-        });
+        return handleRetryOnError(() -> WinningInfo.from(winningNumber, inputBonusNumber()));
     }
 
     private LottoCount inputPrice() {
