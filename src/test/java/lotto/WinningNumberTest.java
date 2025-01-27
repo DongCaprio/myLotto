@@ -48,6 +48,4 @@ class WinningNumberTest {
         // then
         Assertions.assertThat(list1).isEqualTo(list2);
     }
-
-
 }
