@@ -42,8 +42,7 @@ public class Lotto {
         return List.copyOf(numbers);
     }
 
-    @Override
-    public String toString() {
+    public String makeStringLottoNumber() {
         return numbers.toString();
     }
 }

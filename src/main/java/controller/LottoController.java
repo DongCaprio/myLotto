@@ -38,7 +38,7 @@ public class LottoController {
 
     private void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            outputView.println(lotto.toString());
+            outputView.println(lotto.makeStringLottoNumber());
         }
     }
 
