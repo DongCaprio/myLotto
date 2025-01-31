@@ -8,10 +8,10 @@ public enum LottoRank {
     FOURTH(50_000, 4),
     FIFTH(5_000, 3);
 
+    private static final String SECOND_MSG = ", 보너스 볼 일치";
+
     private final int prizeMoney;
     private final int matchCount;
-
-    private static final String SECOND_MSG = ", 보너스 볼 일치";
 
     LottoRank(int prizeMoney, int matchCount) {
         this.prizeMoney = prizeMoney;
