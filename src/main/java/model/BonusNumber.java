@@ -1,6 +1,6 @@
-package lotto;
+package model;
 
-import custom.CustomException;
+import exception.CustomException;
 
 public class BonusNumber {
 

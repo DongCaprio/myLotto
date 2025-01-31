@@ -1,7 +1,7 @@
-package lotto;
+package model;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import custom.CustomException;
+import exception.CustomException;
 import java.util.List;
 import java.util.stream.Collectors;
 

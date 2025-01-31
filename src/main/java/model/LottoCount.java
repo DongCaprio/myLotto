@@ -1,6 +1,6 @@
-package verify;
+package model;
 
-import custom.CustomException;
+import exception.CustomException;
 
 public class LottoCount {
 

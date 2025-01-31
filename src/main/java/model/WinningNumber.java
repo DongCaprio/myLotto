@@ -1,6 +1,6 @@
-package lotto;
+package model;
 
-import custom.CustomException;
+import exception.CustomException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -1,18 +1,14 @@
 package controller;
 
-import static verify.LottoCount.ONE_LOTTO_PRICE;
-
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Supplier;
-import lotto.BonusNumber;
-import lotto.Lotto;
-import lotto.LottoRank;
-import lotto.WinningInfo;
-import lotto.WinningNumber;
-import verify.LottoCount;
+import model.BonusNumber;
+import model.Lotto;
+import model.LottoCount;
+import model.LottoRankCollection;
+import model.WinningInfo;
+import model.WinningNumber;
 import view.InputView;
 import view.OutputView;
 

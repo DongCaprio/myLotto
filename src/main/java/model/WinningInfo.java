@@ -1,6 +1,6 @@
-package lotto;
+package model;
 
-import custom.CustomException;
+import exception.CustomException;
 import java.util.HashSet;
 import java.util.Set;
 
