@@ -8,10 +8,16 @@ import java.util.stream.Collectors;
 
 public class WinningNumber {
 
-    private List<Integer> winningNumber;
+    private final List<Integer> winningNumber;
 
     private WinningNumber(List<Integer> winningNumber) {
         this.winningNumber = winningNumber;
+    }
+
+    public static WinningNumber from(String inputNumbers) {
+        List<Integer> numbers = changeInputToNumber(inputNumbers);
+        Lotto.validate(numbers);
+        return new WinningNumber(numbers);
     }
 
     private static List<Integer> changeInputToNumber(String numbers) {
@@ -24,12 +30,6 @@ public class WinningNumber {
         } catch (NumberFormatException e) {
             throw new CustomException(e.getMessage());
         }
-    }
-
-    public static WinningNumber from(String inputNumbers) {
-        List<Integer> numbers = changeInputToNumber(inputNumbers);
-        Lotto.validate(numbers);
-        return new WinningNumber(numbers);
     }
 
     public List<Integer> getWinningNumber() {
