@@ -32,31 +32,14 @@ public class LottoController {
         List<Lotto> lottos = makeLottos(lottoCount);
         printLottos(lottos);
         WinningInfo winningInfo = makeWinningInfo(inputWinningNumber());
-        List<LottoRank> lottoRanks = getLottoRanks(lottos, winningInfo);
-        LottoRank.printMessage(lottoRanks);
-        calculateRateOfReturn(lottoRanks, lottoCount);
+        LottoRankCollection lottoRanks = LottoRankCollection.from(lottos, winningInfo);
+        outputView.printWinningPaper(lottoRanks.makeWinningPaper(), lottoRanks.calculateRateOfReturn(lottoCount));
     }
 
     private void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             outputView.println(lotto.toString());
         }
-    }
-
-    private List<LottoRank> getLottoRanks(List<Lotto> lottos, WinningInfo winningInfo) {
-        return lottos.stream()
-                .map(winningInfo::specifyLottoRank)
-                .filter(Objects::nonNull)
-                .toList();
-    }
-
-    private void calculateRateOfReturn(List<LottoRank> lottoRanks, int lottoCount) {
-        double totalMoney = lottoRanks.stream()
-                .mapToDouble(LottoRank::getPrizeMoney)
-                .sum();
-        double rateReturn = totalMoney / (ONE_LOTTO_PRICE * lottoCount) * 100;
-        DecimalFormat df = new DecimalFormat("#.##");
-        System.out.printf("총 수익률은 %s%%입니다.%n", df.format(rateReturn));
     }
 
     private WinningInfo makeWinningInfo(WinningNumber winningNumber) {

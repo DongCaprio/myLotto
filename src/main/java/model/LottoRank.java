@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 public enum LottoRank {
 
     FIRST(2_000_000_000, 6),
@@ -20,23 +18,11 @@ public enum LottoRank {
         this.matchCount = matchCount;
     }
 
-    private String makePrintMessage(long count) {
+    public String makePrintMessage(long count) {
         if (this == SECOND) {
-            return String.format("%d개 일치%s (%,d원) - %d개", matchCount, SECOND_MSG, prizeMoney, count);
+            return String.format("%d개 일치%s (%,d원) - %d개%n", matchCount, SECOND_MSG, prizeMoney, count);
         }
-        return String.format("%d개 일치 (%,d원) - %d개", matchCount, prizeMoney, count);
-    }
-
-    public static void printMessage(List<LottoRank> lottoRanks) {
-        System.out.printf("%n당첨 통계%n---%n");
-        LottoRank[] ranks = LottoRank.values();
-        for (int i = ranks.length - 1; i >= 0; i--) {
-            LottoRank lottoRank = ranks[i];
-            long count = lottoRanks.stream()
-                    .filter(rank -> rank == lottoRank)
-                    .count();
-            System.out.println(lottoRank.makePrintMessage(count));
-        }
+        return String.format("%d개 일치 (%,d원) - %d개%n", matchCount, prizeMoney, count);
     }
 
     public int getPrizeMoney() {
