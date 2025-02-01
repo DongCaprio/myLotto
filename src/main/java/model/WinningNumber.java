@@ -7,29 +7,29 @@ import java.util.stream.Collectors;
 
 public class WinningNumber {
 
-    private final List<Integer> winningNumber;
+    private final List<LottoNumber> winningNumber;
 
-    private WinningNumber(List<Integer> winningNumber) {
+    private WinningNumber(List<LottoNumber> winningNumber) {
         this.winningNumber = winningNumber;
     }
 
     public static WinningNumber from(String inputNumbers) {
-        List<Integer> numbers = changeInputToNumber(inputNumbers);
+        List<LottoNumber> numbers = changeInputToNumber(inputNumbers);
         Lotto.validate(numbers);
         return new WinningNumber(numbers);
     }
 
-    private static List<Integer> changeInputToNumber(String numbers) {
+    private static List<LottoNumber> changeInputToNumber(String numbers) {
         try {
             return Arrays.stream(numbers.split(","))
-                    .map(stringNumber -> Integer.parseInt(stringNumber.trim()))
+                    .map(stringNumber -> LottoNumber.from(Integer.parseInt(stringNumber.trim())))
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new CustomException(e.getMessage());
         }
     }
 
-    public List<Integer> getWinningNumber() {
+    public List<LottoNumber> getWinningNumber() {
         return List.copyOf(winningNumber);
     }
 }

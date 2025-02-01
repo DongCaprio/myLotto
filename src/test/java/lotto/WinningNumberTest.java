@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
+import model.LottoNumber;
 import model.WinningNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -44,7 +45,8 @@ class WinningNumberTest {
                 .map(Integer::parseInt)
                 .toList();
 
-        List<Integer> list2 = WinningNumber.from(winningNumber).getWinningNumber();
+        List<LottoNumber> winningNumberList = WinningNumber.from(winningNumber).getWinningNumber();
+        List<Integer> list2 = winningNumberList.stream().map(LottoNumber::getLottoNumber).toList();
 
         // then
         Assertions.assertThat(list1).isEqualTo(list2);

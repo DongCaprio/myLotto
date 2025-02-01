@@ -5,9 +5,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.Collections;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import model.Lotto;
+import model.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -44,12 +45,14 @@ class LottoTest {
         for (int i = 0; i < 100; i++) {
             // when
             Lotto lotto = Lotto.makeRandomLotto(Lotto.LOTTO_START_NUM, Lotto.LOTTO_END_NUM, Lotto.LOTTO_NUM_SIZE);
-
+            IntSummaryStatistics stats = lotto.getNumbers().stream()
+                    .mapToInt(LottoNumber::getLottoNumber)
+                    .summaryStatistics();
             // then
             assertAll(
                     () -> assertThat(lotto.getNumbers().size()).isEqualTo(6),
-                    () -> assertThat(Collections.min(lotto.getNumbers())).isGreaterThan(0),
-                    () -> assertThat(Collections.max(lotto.getNumbers())).isLessThanOrEqualTo(45));
+                    () -> assertThat(stats.getMin()).isGreaterThan(0),
+                    () -> assertThat(stats.getMax()).isLessThanOrEqualTo(45));
         }
     }
 }

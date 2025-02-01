@@ -7,9 +7,9 @@ import static model.Lotto.LOTTO_START_NUM;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
-import model.BonusNumber;
 import model.Lotto;
 import model.LottoCount;
+import model.LottoNumber;
 import model.LottoRankCollection;
 import model.WinningInformation;
 import model.WinningNumber;
@@ -64,10 +64,10 @@ public class LottoController {
         });
     }
 
-    private BonusNumber inputBonusNumber() {
+    private LottoNumber inputBonusNumber() {
         return handleRetryOnError(() -> {
             String inputBonusNumbers = inputView.inputMessage(InputView.BONUS_NUMBER);
-            return BonusNumber.from(inputBonusNumbers);
+            return LottoNumber.from(inputBonusNumbers);
         });
     }
 

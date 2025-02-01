@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
-import model.BonusNumber;
 import model.Lotto;
+import model.LottoNumber;
 import model.LottoRank;
 import model.WinningInformation;
 import model.WinningNumber;
@@ -20,11 +20,11 @@ class WinningInfoTest {
     void winningInfoTest1() {
         assertAll(
                 () -> assertThrows(RuntimeException.class,
-                        () -> WinningInformation.from(WinningNumber.from("1,2,3,4,5,6"), BonusNumber.from("1"))),
+                        () -> WinningInformation.from(WinningNumber.from("1,2,3,4,5,6"), LottoNumber.from("1"))),
                 () -> assertThrows(RuntimeException.class,
-                        () -> WinningInformation.from(WinningNumber.from("1,2,3,4,5,6"), BonusNumber.from("6"))),
+                        () -> WinningInformation.from(WinningNumber.from("1,2,3,4,5,6"), LottoNumber.from("6"))),
                 () -> assertThrows(RuntimeException.class,
-                        () -> WinningInformation.from(WinningNumber.from("11,22,33,44,15,16"), BonusNumber.from("33")))
+                        () -> WinningInformation.from(WinningNumber.from("11,22,33,44,15,16"), LottoNumber.from("33")))
         );
 
     }
@@ -35,7 +35,7 @@ class WinningInfoTest {
     void winningInfoTest2() {
         // given
         WinningInformation winningInfo = WinningInformation.from(WinningNumber.from("1,2,3,4,5,6"),
-                BonusNumber.from("7"));
+                LottoNumber.from("7"));
 
         // when & then
         assertAll(() -> Assertions.assertThat(winningInfo.specifyLottoRank(new Lotto(List.of(1, 2, 3, 4, 5, 6))))

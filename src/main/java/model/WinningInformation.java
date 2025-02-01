@@ -1,26 +1,28 @@
 package model;
 
 import exception.CustomException;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class WinningInformation {
 
     private final WinningNumber winningNumber;
-    private final BonusNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    private WinningInformation(WinningNumber winningNumber, BonusNumber bonusNumber) {
+    private WinningInformation(WinningNumber winningNumber, LottoNumber bonusNumber) {
         this.winningNumber = winningNumber;
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningInformation from(WinningNumber winningNumber, BonusNumber bonusNumber) {
+    public static WinningInformation from(WinningNumber winningNumber, LottoNumber bonusNumber) {
         checkDuplicate(winningNumber, bonusNumber);
         return new WinningInformation(winningNumber, bonusNumber);
     }
 
-    private static void checkDuplicate(WinningNumber winningNumber, BonusNumber bonusNumber) {
-        if (winningNumber.getWinningNumber().contains(bonusNumber.getBonusNumber())) {
+    private static void checkDuplicate(WinningNumber winningNumber, LottoNumber bonusNumber) {
+        if (winningNumber.getWinningNumber()
+                .stream()
+                .anyMatch(lottoNumber -> lottoNumber.getLottoNumber() == bonusNumber.getLottoNumber())) {
             throw new CustomException("로또 당첨 번호와 보너스 번호는 중복될 수 없습니다");
         }
     }
@@ -43,14 +45,22 @@ public class WinningInformation {
     }
 
     private int checkWinningCount(Lotto lotto) {
-        Set<Integer> winningSet = new HashSet<>(winningNumber.getWinningNumber());
-        Set<Integer> lottoSet = new HashSet<>(lotto.getNumbers());
+        Set<Integer> winningSet = winningNumber.getWinningNumber().stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toSet());
+
+        Set<Integer> lottoSet = lotto.getNumbers().stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toSet());
+
         winningSet.retainAll(lottoSet);
         return winningSet.size();
     }
 
     private LottoRank checkBonusNumber(Lotto lotto) {
-        boolean matchBonus = lotto.getNumbers().contains(bonusNumber.getBonusNumber());
+        boolean matchBonus = lotto.getNumbers().stream()
+                .map(LottoNumber::getLottoNumber)
+                .anyMatch(num -> num == bonusNumber.getLottoNumber());
         if (matchBonus) {
             return LottoRank.SECOND;
         }
