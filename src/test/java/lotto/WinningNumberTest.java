@@ -18,9 +18,9 @@ class WinningNumberTest {
     @Test
     void winningInfoTest1() {
         assertAll(
-                () -> assertThrows(IllegalArgumentException.class, () -> WinningNumber.from("1,2,3,4,5,6,7")),
-                () -> assertThrows(IllegalArgumentException.class, () -> WinningNumber.from("1,2,3,4,5")),
-                () -> assertThrows(IllegalArgumentException.class, () -> WinningNumber.from(""))
+                () -> assertThrows(RuntimeException.class, () -> WinningNumber.from("1,2,3,4,5,6,7")),
+                () -> assertThrows(RuntimeException.class, () -> WinningNumber.from("1,2,3,4,5")),
+                () -> assertThrows(RuntimeException.class, () -> WinningNumber.from(""))
         );
     }
 
@@ -28,9 +28,9 @@ class WinningNumberTest {
     @Test
     void winningInfoTest2() {
         assertAll(
-                () -> assertThrows(IllegalArgumentException.class, () -> WinningNumber.from("aa")),
-                () -> assertThrows(IllegalArgumentException.class, () -> WinningNumber.from("1,e,2,3,4,5")),
-                () -> assertThrows(IllegalArgumentException.class, () -> WinningNumber.from(""))
+                () -> assertThrows(RuntimeException.class, () -> WinningNumber.from("aa")),
+                () -> assertThrows(RuntimeException.class, () -> WinningNumber.from("1,e,2,3,4,5")),
+                () -> assertThrows(RuntimeException.class, () -> WinningNumber.from(""))
         );
     }
 

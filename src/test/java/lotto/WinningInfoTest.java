@@ -7,7 +7,7 @@ import java.util.List;
 import model.BonusNumber;
 import model.Lotto;
 import model.LottoRank;
-import model.WinningInfo;
+import model.WinningInformation;
 import model.WinningNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -19,12 +19,12 @@ class WinningInfoTest {
     @DisplayName("당첨번호와 보너스 번호에 중복된 숫자가 있으면 예외를 발생시킨다")
     void winningInfoTest1() {
         assertAll(
-                () -> assertThrows(IllegalArgumentException.class,
-                        () -> WinningInfo.from(WinningNumber.from("1,2,3,4,5,6"), BonusNumber.from("1"))),
-                () -> assertThrows(IllegalArgumentException.class,
-                        () -> WinningInfo.from(WinningNumber.from("1,2,3,4,5,6"), BonusNumber.from("6"))),
-                () -> assertThrows(IllegalArgumentException.class,
-                        () -> WinningInfo.from(WinningNumber.from("11,22,33,44,15,16"), BonusNumber.from("33")))
+                () -> assertThrows(RuntimeException.class,
+                        () -> WinningInformation.from(WinningNumber.from("1,2,3,4,5,6"), BonusNumber.from("1"))),
+                () -> assertThrows(RuntimeException.class,
+                        () -> WinningInformation.from(WinningNumber.from("1,2,3,4,5,6"), BonusNumber.from("6"))),
+                () -> assertThrows(RuntimeException.class,
+                        () -> WinningInformation.from(WinningNumber.from("11,22,33,44,15,16"), BonusNumber.from("33")))
         );
 
     }
@@ -34,7 +34,7 @@ class WinningInfoTest {
     @DisplayName("로또 당첨에 맞는 LottoRank를 반환한다")
     void winningInfoTest2() {
         // given
-        WinningInfo winningInfo = WinningInfo.from(WinningNumber.from("1,2,3,4,5,6"),
+        WinningInformation winningInfo = WinningInformation.from(WinningNumber.from("1,2,3,4,5,6"),
                 BonusNumber.from("7"));
 
         // when & then

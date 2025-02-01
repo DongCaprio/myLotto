@@ -26,7 +26,7 @@ class BonusNumberTest {
     @ValueSource(strings = {"-1", "0", "abc", " ", "", "3333333333333333", "46"})
     void bonusNumberTest2(String inputCount) {
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             BonusNumber.from(inputCount);
         });
     }

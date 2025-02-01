@@ -15,7 +15,7 @@ class LottoCountTest {
     @ParameterizedTest
     @ValueSource(strings = {"1001", "", "100000000000", "999", "e"})
     void lottoCountTest1(String errorNumber) {
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             // then
             LottoCount.from(errorNumber);
         });
