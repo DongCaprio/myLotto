@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int LOTTO_START_NUM = 1;
-    private static final int LOTTO_END_NUM = 45;
-    private static final int LOTTO_NUM_SIZE = 6;
+    public static final int LOTTO_START_NUM = 1;
+    public static final int LOTTO_END_NUM = 45;
+    public static final int LOTTO_NUM_SIZE = 6;
 
     private final List<Integer> numbers;
 
@@ -33,8 +33,8 @@ public class Lotto {
         }
     }
 
-    public static Lotto makeRandomLotto() {
-        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(LOTTO_START_NUM, LOTTO_END_NUM, LOTTO_NUM_SIZE);
+    public static Lotto makeRandomLotto(int startNumber, int endNumber, int numberSize) {
+        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(startNumber, endNumber, numberSize);
         return new Lotto(numbers);
     }
 

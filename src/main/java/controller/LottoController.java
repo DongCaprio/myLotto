@@ -1,5 +1,9 @@
 package controller;
 
+import static model.Lotto.LOTTO_END_NUM;
+import static model.Lotto.LOTTO_NUM_SIZE;
+import static model.Lotto.LOTTO_START_NUM;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -7,7 +11,7 @@ import model.BonusNumber;
 import model.Lotto;
 import model.LottoCount;
 import model.LottoRankCollection;
-import model.WinningInfo;
+import model.WinningInformation;
 import model.WinningNumber;
 import view.InputView;
 import view.OutputView;
@@ -29,7 +33,7 @@ public class LottoController {
     public void run() {
         int lottoCount = inputPrice().getLottoCount();
         outputView.printLottoCount(lottoCount);
-        List<Lotto> lottos = makeLottos(lottoCount);
+        List<Lotto> lottos = makeLottos(lottoCount, LOTTO_START_NUM, LOTTO_END_NUM, LOTTO_NUM_SIZE);
         printLottos(lottos);
         WinningInformation winningInfo = makeWinningInfo(inputWinningNumber());
         LottoRankCollection lottoRanks = LottoRankCollection.from(lottos, winningInfo);
@@ -67,10 +71,10 @@ public class LottoController {
         });
     }
 
-    private List<Lotto> makeLottos(int count) {
+    private List<Lotto> makeLottos(int count, int startNumber, int endNumber, int numberSize) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.makeRandomLotto());
+            lottos.add(Lotto.makeRandomLotto(startNumber, endNumber, numberSize));
         }
         return lottos;
     }
