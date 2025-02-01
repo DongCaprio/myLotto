@@ -20,7 +20,7 @@ public class LottoController {
     private <T> T handleRetryOnError(Supplier<T> method) {
         try {
             return method.get();
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             return handleRetryOnError(method);
         }
@@ -31,7 +31,7 @@ public class LottoController {
         outputView.printLottoCount(lottoCount);
         List<Lotto> lottos = makeLottos(lottoCount);
         printLottos(lottos);
-        WinningInfo winningInfo = makeWinningInfo(inputWinningNumber());
+        WinningInformation winningInfo = makeWinningInfo(inputWinningNumber());
         LottoRankCollection lottoRanks = LottoRankCollection.from(lottos, winningInfo);
         outputView.printWinningPaper(lottoRanks.makeWinningPaper(), lottoRanks.calculateRateOfReturn(lottoCount));
     }
@@ -42,8 +42,8 @@ public class LottoController {
         }
     }
 
-    private WinningInfo makeWinningInfo(WinningNumber winningNumber) {
-        return handleRetryOnError(() -> WinningInfo.from(winningNumber, inputBonusNumber()));
+    private WinningInformation makeWinningInfo(WinningNumber winningNumber) {
+        return handleRetryOnError(() -> WinningInformation.from(winningNumber, inputBonusNumber()));
     }
 
     private LottoCount inputPrice() {

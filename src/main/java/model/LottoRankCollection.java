@@ -14,7 +14,7 @@ public class LottoRankCollection {
         this.lottoRanks = lottoRanks;
     }
 
-    public static LottoRankCollection from(List<Lotto> lottos, WinningInfo winningInfo) {
+    public static LottoRankCollection from(List<Lotto> lottos, WinningInformation winningInfo) {
         return new LottoRankCollection(lottos.stream()
                 .map(winningInfo::specifyLottoRank)
                 .filter(Objects::nonNull)

@@ -4,19 +4,19 @@ import exception.CustomException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class WinningInfo {
+public class WinningInformation {
 
     private final WinningNumber winningNumber;
     private final BonusNumber bonusNumber;
 
-    private WinningInfo(WinningNumber winningNumber, BonusNumber bonusNumber) {
+    private WinningInformation(WinningNumber winningNumber, BonusNumber bonusNumber) {
         this.winningNumber = winningNumber;
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningInfo from(WinningNumber winningNumber, BonusNumber bonusNumber) {
+    public static WinningInformation from(WinningNumber winningNumber, BonusNumber bonusNumber) {
         checkDuplicate(winningNumber, bonusNumber);
-        return new WinningInfo(winningNumber, bonusNumber);
+        return new WinningInformation(winningNumber, bonusNumber);
     }
 
     private static void checkDuplicate(WinningNumber winningNumber, BonusNumber bonusNumber) {
