@@ -1,7 +1,6 @@
 package model;
 
 import exception.CustomException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,11 +21,9 @@ public class WinningNumber {
 
     private static List<Integer> changeInputToNumber(String numbers) {
         try {
-            return Arrays.stream(Arrays.stream(numbers.split(","))
-                            .map(String::trim)
-                            .toArray(String[]::new))
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toCollection(ArrayList::new));
+            return Arrays.stream(numbers.split(","))
+                    .map(stringNumber -> Integer.parseInt(stringNumber.trim()))
+                    .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new CustomException(e.getMessage());
         }
