@@ -52,21 +52,21 @@ public class LottoController {
 
     private LottoCount inputPrice() {
         return handleRetryOnError(() -> {
-            String input = inputView.inputMessage(InputView.LOTTO_PRICE);
+            String input = inputView.inputLottoPrice();
             return LottoCount.from(input);
         });
     }
 
     private WinningNumber inputWinningNumber() {
         return handleRetryOnError(() -> {
-            String inputWinningNumbers = inputView.inputMessage(InputView.LOTTO_NUMBER);
+            String inputWinningNumbers = inputView.inputLottoNumber();
             return WinningNumber.from(inputWinningNumbers);
         });
     }
 
     private LottoNumber inputBonusNumber() {
         return handleRetryOnError(() -> {
-            String inputBonusNumbers = inputView.inputMessage(InputView.BONUS_NUMBER);
+            String inputBonusNumbers = inputView.inputBonusNumber();
             return LottoNumber.from(inputBonusNumbers);
         });
     }
