@@ -29,6 +29,10 @@ public class LottoNumber {
         }
     }
 
+    public boolean isSameNumber(int number) {
+        return number == lottoNumber;
+    }
+
     public int getLottoNumber() {
         return lottoNumber;
     }

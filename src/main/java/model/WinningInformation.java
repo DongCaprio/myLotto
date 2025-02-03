@@ -60,7 +60,7 @@ public class WinningInformation {
     private LottoRank checkBonusNumber(Lotto lotto) {
         boolean matchBonus = lotto.getNumbers().stream()
                 .map(LottoNumber::getLottoNumber)
-                .anyMatch(num -> num == bonusNumber.getLottoNumber());
+                .anyMatch(bonusNumber::isSameNumber);
         if (matchBonus) {
             return LottoRank.SECOND;
         }
