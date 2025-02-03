@@ -8,8 +8,8 @@ public class LottoCount {
 
     public static final int ONE_LOTTO_PRICE = 1000;
 
-    private LottoCount(int lottoPrice) {
-        this.lottoCount = lottoPrice;
+    private LottoCount(int lottoCount) {
+        this.lottoCount = lottoCount;
     }
 
     public static LottoCount from(String inputPrice) {
