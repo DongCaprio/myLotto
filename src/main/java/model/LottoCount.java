@@ -5,6 +5,7 @@ import exception.CustomException;
 public class LottoCount {
 
     public static final int ONE_LOTTO_PRICE = 1000;
+    private static final int MAX_LOTTO_PRICE = 1_000_000_000;
 
     private final int lottoCount;
 
@@ -27,7 +28,7 @@ public class LottoCount {
     }
 
     private static void verifyPrice(int price) {
-        if (price < ONE_LOTTO_PRICE || price > 1_000_000_000) {
+        if (price < ONE_LOTTO_PRICE || price > MAX_LOTTO_PRICE) {
             throw new CustomException("1000원부터 10억원까지 입력 가능합니다.");
         }
         if (price % ONE_LOTTO_PRICE != 0) {
