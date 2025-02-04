@@ -18,8 +18,13 @@ import view.OutputView;
 
 public class LottoController {
 
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public LottoController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
 
     private <T> T handleRetryOnError(Supplier<T> method) {
         try {
