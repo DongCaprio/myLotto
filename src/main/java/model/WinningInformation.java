@@ -22,7 +22,7 @@ public class WinningInformation {
     private static void checkDuplicate(WinningNumber winningNumber, LottoNumber bonusNumber) {
         if (winningNumber.getWinningNumber()
                 .stream()
-                .anyMatch(lottoNumber -> lottoNumber.getLottoNumber() == bonusNumber.getLottoNumber())) {
+                .anyMatch(lottoNumber -> lottoNumber.isSameNumber(bonusNumber.getLottoNumber()))) {
             throw new CustomException("로또 당첨 번호와 보너스 번호는 중복될 수 없습니다");
         }
     }
