@@ -25,7 +25,6 @@ public class LottoRankCollection {
                         ))
                         .toList()
         );
-
     }
 
     public String calculateRateOfReturn(int lottoCount) {
