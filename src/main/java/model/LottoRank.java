@@ -9,8 +9,6 @@ public enum LottoRank {
     FIFTH(5_000, 3),
     FAIL(0, 0);
 
-    private static final String SECOND_MSG = ", 보너스 볼 일치";
-
     private final int prizeMoney;
     private final int matchCount;
 
