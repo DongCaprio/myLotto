@@ -27,24 +27,7 @@ public class WinningInformation {
         }
     }
 
-    public LottoRank specifyLottoRank(Lotto lotto) {
-        int winningCount = checkWinningCount(lotto);
-        if (winningCount == 6) {
-            return LottoRank.FIRST;
-        }
-        if (winningCount == 5) {
-            return checkBonusNumber(lotto);
-        }
-        if (winningCount == 4) {
-            return LottoRank.FOURTH;
-        }
-        if (winningCount == 3) {
-            return LottoRank.FIFTH;
-        }
-        return null;
-    }
-
-    private int checkWinningCount(Lotto lotto) {
+    public int checkWinningCount(Lotto lotto) {
         Set<Integer> winningSet = winningNumber.getWinningNumber().stream()
                 .map(LottoNumber::getLottoNumber)
                 .collect(Collectors.toSet());
@@ -57,13 +40,10 @@ public class WinningInformation {
         return winningSet.size();
     }
 
-    private LottoRank checkBonusNumber(Lotto lotto) {
-        boolean matchBonus = lotto.getNumbers().stream()
+    public boolean matchBonusNumber(Lotto lotto) {
+        return lotto.getNumbers().stream()
                 .map(LottoNumber::getLottoNumber)
                 .anyMatch(bonusNumber::isSameNumber);
-        if (matchBonus) {
-            return LottoRank.SECOND;
-        }
-        return LottoRank.THIRD;
     }
+
 }

@@ -4,7 +4,6 @@ import static model.LottoCount.ONE_LOTTO_PRICE;
 
 import java.text.DecimalFormat;
 import java.util.List;
-import java.util.Objects;
 
 public class LottoRankCollection {
 
@@ -14,11 +13,16 @@ public class LottoRankCollection {
         this.lottoRanks = lottoRanks;
     }
 
-    public static LottoRankCollection from(List<Lotto> lottos, WinningInformation winningInfo) {
-        return new LottoRankCollection(lottos.stream()
-                .map(winningInfo::specifyLottoRank)
-                .filter(Objects::nonNull)
-                .toList());
+    public static LottoRankCollection from(List<Lotto> lottos, WinningInformation winningInformation) {
+        return new LottoRankCollection(
+                lottos.stream()
+                        .map(lotto -> LottoRank.specifyLottoRank(
+                                winningInformation.checkWinningCount(lotto),
+                                winningInformation.matchBonusNumber(lotto)
+                        ))
+                        .toList()
+        );
+
     }
 
     public String calculateRateOfReturn(int lottoCount) {

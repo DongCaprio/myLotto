@@ -6,7 +6,8 @@ public enum LottoRank {
     SECOND(30_000_000, 5),
     THIRD(1_500_000, 5),
     FOURTH(50_000, 4),
-    FIFTH(5_000, 3);
+    FIFTH(5_000, 3),
+    FAIL(0, 0);
 
     private static final String SECOND_MSG = ", 보너스 볼 일치";
 
@@ -16,6 +17,25 @@ public enum LottoRank {
     LottoRank(int prizeMoney, int matchCount) {
         this.prizeMoney = prizeMoney;
         this.matchCount = matchCount;
+    }
+
+    public static LottoRank specifyLottoRank(int winningCount, boolean matchBonus) {
+        if (winningCount == 6) {
+            return LottoRank.FIRST;
+        }
+        if (winningCount == 5) {
+            if (matchBonus) {
+                return LottoRank.SECOND;
+            }
+            return LottoRank.THIRD;
+        }
+        if (winningCount == 4) {
+            return LottoRank.FOURTH;
+        }
+        if (winningCount == 3) {
+            return LottoRank.FIFTH;
+        }
+        return LottoRank.FAIL;
     }
 
     public String makePrintMessage(long count) {
