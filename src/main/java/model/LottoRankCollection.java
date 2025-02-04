@@ -2,7 +2,10 @@ package model;
 
 import static model.LottoCount.ONE_LOTTO_PRICE;
 
+import dto.WinningPaper;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoRankCollection {
@@ -34,16 +37,25 @@ public class LottoRankCollection {
         return decimalFormat.format(rateReturn);
     }
 
-    public String makeWinningPaper() {
+    public List<WinningPaper> makeWinningPaper() {
         LottoRank[] ranks = LottoRank.values();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = ranks.length - 1; i >= 0; i--) {
-            LottoRank lottoRank = ranks[i];
+        List<WinningPaper> winningPapers = new ArrayList<>();
+
+        for (LottoRank rank : ranks) {
             long count = lottoRanks.stream()
-                    .filter(rank -> rank == lottoRank)
+                    .filter(lottoRank -> lottoRank == rank)
                     .count();
-            stringBuilder.append(lottoRank.makePrintMessage(count));
+            if (rank.getPrizeMoney() > 0) {
+                boolean bonusCheck = rank == LottoRank.SECOND;
+                winningPapers.add(new WinningPaper(
+                        rank.getMatchCount(),
+                        rank.getPrizeMoney(),
+                        (int) count,
+                        bonusCheck)
+                );
+            }
         }
-        return stringBuilder.toString();
+        Collections.reverse(winningPapers);
+        return winningPapers;
     }
 }

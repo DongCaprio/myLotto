@@ -38,14 +38,11 @@ public enum LottoRank {
         return LottoRank.FAIL;
     }
 
-    public String makePrintMessage(long count) {
-        if (this == SECOND) {
-            return String.format("%d개 일치%s (%,d원) - %d개%n", matchCount, SECOND_MSG, prizeMoney, count);
-        }
-        return String.format("%d개 일치 (%,d원) - %d개%n", matchCount, prizeMoney, count);
-    }
-
     public int getPrizeMoney() {
         return prizeMoney;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 }

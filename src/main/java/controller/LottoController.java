@@ -37,7 +37,8 @@ public class LottoController {
         printLottos(lottos);
         WinningInformation winningInfo = makeWinningInfo(inputWinningNumber());
         LottoRankCollection lottoRanks = LottoRankCollection.from(lottos, winningInfo);
-        outputView.printWinningPaper(lottoRanks.makeWinningPaper(), lottoRanks.calculateRateOfReturn(lottoCount));
+        outputView.printWinningPaper(lottoRanks.makeWinningPaper());
+        outputView.printRateOfReturn(lottoRanks.calculateRateOfReturn(lottoCount));
     }
 
     private void printLottos(List<Lotto> lottos) {
