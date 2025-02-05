@@ -26,15 +26,6 @@ public class LottoController {
         this.outputView = outputView;
     }
 
-    private <T> T handleRetryOnError(Supplier<T> method) {
-        try {
-            return method.get();
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-            return handleRetryOnError(method);
-        }
-    }
-
     public void run() {
         int lottoCount = inputPrice().getLottoCount();
         outputView.printLottoCount(lottoCount);
@@ -44,6 +35,14 @@ public class LottoController {
         LottoRankCollection lottoRanks = LottoRankCollection.from(lottos, winningInfo);
         outputView.printWinningPaper(lottoRanks.makeWinningPaper());
         outputView.printRateOfReturn(lottoRanks.calculateRateOfReturn(lottoCount));
+    }
+
+    private List<Lotto> makeLottos(int count, int startNumber, int endNumber, int numberSize) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottos.add(Lotto.makeRandomLotto(startNumber, endNumber, numberSize));
+        }
+        return lottos;
     }
 
     private void printLottos(List<Lotto> lottos) {
@@ -77,11 +76,12 @@ public class LottoController {
         });
     }
 
-    private List<Lotto> makeLottos(int count, int startNumber, int endNumber, int numberSize) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.makeRandomLotto(startNumber, endNumber, numberSize));
+    private <T> T handleRetryOnError(Supplier<T> method) {
+        try {
+            return method.get();
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            return handleRetryOnError(method);
         }
-        return lottos;
     }
 }

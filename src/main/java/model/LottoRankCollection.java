@@ -39,15 +39,15 @@ public class LottoRankCollection {
         List<WinningPaperDto> winningPapers = new ArrayList<>();
 
         for (LottoRank rank : ranks) {
-            long count = lottoRanks.stream()
+            long matchCount = lottoRanks.stream()
                     .filter(lottoRank -> lottoRank == rank)
                     .count();
-            if (rank.getPrizeMoney() > 0) {
+            if (rank.getPrizeMoney() > LottoRank.FAIL.getPrizeMoney()) {
                 boolean bonusCheck = rank == LottoRank.SECOND;
                 winningPapers.add(new WinningPaperDto(
                         rank.getMatchCount(),
                         rank.getPrizeMoney(),
-                        (int) count,
+                        (int) matchCount,
                         bonusCheck)
                 );
             }
