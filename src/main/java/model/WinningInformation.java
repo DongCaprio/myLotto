@@ -20,9 +20,11 @@ public class WinningInformation {
     }
 
     private static void checkDuplicate(WinningNumber winningNumber, LottoNumber bonusNumber) {
-        if (winningNumber.getWinningNumber()
+        boolean duplicateStatus = winningNumber.getWinningNumber()
                 .stream()
-                .anyMatch(lottoNumber -> lottoNumber.isSameNumber(bonusNumber.getLottoNumber()))) {
+                .anyMatch(lottoNumber -> lottoNumber.isSameNumber(bonusNumber.getLottoNumber()));
+
+        if (duplicateStatus) {
             throw new CustomException("로또 당첨 번호와 보너스 번호는 중복될 수 없습니다");
         }
     }
