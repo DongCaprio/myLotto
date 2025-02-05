@@ -1,7 +1,7 @@
 package view;
 
-import dto.WinningPaper;
 import java.util.List;
+import model.dto.WinningPaperDto;
 
 public class OutputView {
 
@@ -17,12 +17,12 @@ public class OutputView {
         println("\n" + count + "개를 구매했습니다.");
     }
 
-    public void printWinningPaper(List<WinningPaper> winningPapers) {
+    public void printWinningPaper(List<WinningPaperDto> winningPapers) {
         System.out.printf(HEADER_FORMAT);
         winningPapers.forEach(this::printPaper);
     }
 
-    private void printPaper(WinningPaper paper) {
+    private void printPaper(WinningPaperDto paper) {
         String format = NORMAL_PRIZE_FORMAT;
         if (paper.isBonusCheck()) {
             format = SECOND_PRIZE_FORMAT;

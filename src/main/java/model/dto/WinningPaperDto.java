@@ -1,13 +1,13 @@
-package dto;
+package model.dto;
 
-public class WinningPaper {
+public class WinningPaperDto {
 
     private final int matchedNumber;
     private final int prizeMoney;
     private final int winnerCount;
     private final boolean bonusCheck;
 
-    public WinningPaper(int matchedNumber, int prizeMoney, int winnerCount, boolean bonusCheck) {
+    public WinningPaperDto(int matchedNumber, int prizeMoney, int winnerCount, boolean bonusCheck) {
         this.matchedNumber = matchedNumber;
         this.prizeMoney = prizeMoney;
         this.winnerCount = winnerCount;

@@ -1,12 +1,10 @@
 package model;
 
-import static model.LottoCount.ONE_LOTTO_PRICE;
-
-import dto.WinningPaper;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import model.dto.WinningPaperDto;
 
 public class LottoRankCollection {
 
@@ -36,9 +34,9 @@ public class LottoRankCollection {
         return decimalFormat.format(rateReturn);
     }
 
-    public List<WinningPaper> makeWinningPaper() {
+    public List<WinningPaperDto> makeWinningPaper() {
         LottoRank[] ranks = LottoRank.values();
-        List<WinningPaper> winningPapers = new ArrayList<>();
+        List<WinningPaperDto> winningPapers = new ArrayList<>();
 
         for (LottoRank rank : ranks) {
             long count = lottoRanks.stream()
@@ -46,7 +44,7 @@ public class LottoRankCollection {
                     .count();
             if (rank.getPrizeMoney() > 0) {
                 boolean bonusCheck = rank == LottoRank.SECOND;
-                winningPapers.add(new WinningPaper(
+                winningPapers.add(new WinningPaperDto(
                         rank.getMatchCount(),
                         rank.getPrizeMoney(),
                         (int) count,
