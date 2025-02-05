@@ -29,7 +29,7 @@ public class LottoRankCollection {
         double totalMoney = lottoRanks.stream()
                 .mapToDouble(LottoRank::getPrizeMoney)
                 .sum();
-        double rateReturn = totalMoney / (ONE_LOTTO_PRICE * lottoCount) * 100;
+        double rateReturn = totalMoney / (LottoPrice.PRICE.getOnePrice() * lottoCount) * 100;
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         return decimalFormat.format(rateReturn);
     }

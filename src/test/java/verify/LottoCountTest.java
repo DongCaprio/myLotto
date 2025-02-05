@@ -1,10 +1,10 @@
 package verify;
 
-import static model.LottoCount.ONE_LOTTO_PRICE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import model.LottoCount;
+import model.LottoPrice;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -25,7 +25,7 @@ class LottoCountTest {
     @ParameterizedTest
     @ValueSource(strings = {"1000", "10000", "380000"})
     void lottoCountTest2(String price) {
-        assertEquals(Integer.parseInt(price) / ONE_LOTTO_PRICE,
+        assertEquals(Integer.parseInt(price) / LottoPrice.PRICE.getOnePrice(),
                 LottoCount.from(price).getLottoCount());
     }
 }
