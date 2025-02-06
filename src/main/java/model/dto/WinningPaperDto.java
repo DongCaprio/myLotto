@@ -1,5 +1,9 @@
 package model.dto;
 
+import java.util.List;
+import model.LottoRank;
+import model.LottoRankCount;
+
 public class WinningPaperDto {
 
     private final int matchedNumber;
@@ -7,11 +11,21 @@ public class WinningPaperDto {
     private final int winnerCount;
     private final boolean bonusCheck;
 
-    public WinningPaperDto(int matchedNumber, int prizeMoney, int winnerCount, boolean bonusCheck) {
+    private WinningPaperDto(int matchedNumber, int prizeMoney, int winnerCount, boolean bonusCheck) {
         this.matchedNumber = matchedNumber;
         this.prizeMoney = prizeMoney;
         this.winnerCount = winnerCount;
         this.bonusCheck = bonusCheck;
+    }
+
+    public static List<WinningPaperDto> ofList(List<LottoRankCount> lottoRankCounts) {
+        return lottoRankCounts.stream()
+                .map(rankCount -> new WinningPaperDto(
+                        rankCount.getRank().getMatchCount(),
+                        rankCount.getRank().getPrizeMoney(),
+                        rankCount.getMatchCount(),
+                        rankCount.getRank() == LottoRank.SECOND
+                )).toList();
     }
 
     public int getMatchedNumber() {

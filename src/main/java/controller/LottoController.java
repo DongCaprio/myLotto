@@ -11,8 +11,10 @@ import model.Lotto;
 import model.LottoCount;
 import model.LottoNumber;
 import model.LottoRankCollection;
+import model.LottoRankCount;
 import model.WinningInformation;
 import model.WinningNumber;
+import model.dto.WinningPaperDto;
 import view.InputView;
 import view.OutputView;
 
@@ -33,7 +35,8 @@ public class LottoController {
         printLottos(lottos);
         WinningInformation winningInfo = makeWinningInfo(inputWinningNumber());
         LottoRankCollection lottoRanks = LottoRankCollection.from(lottos, winningInfo);
-        outputView.printWinningPaper(lottoRanks.makeWinningPaper());
+        List<LottoRankCount> lottoRankCounts = lottoRanks.makeWinningPaper();
+        outputView.printWinningPaper(WinningPaperDto.ofList(lottoRankCounts));
         outputView.printRateOfReturn(lottoRanks.calculateRateOfReturn(lottoCount));
     }
 

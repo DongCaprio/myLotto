@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import model.dto.WinningPaperDto;
 
 public class LottoRankCollection {
 
@@ -34,25 +33,19 @@ public class LottoRankCollection {
         return decimalFormat.format(rateReturn);
     }
 
-    public List<WinningPaperDto> makeWinningPaper() {
+    public List<LottoRankCount> makeWinningPaper() {
         LottoRank[] ranks = LottoRank.values();
-        List<WinningPaperDto> winningPapers = new ArrayList<>();
+        List<LottoRankCount> lottoRankCounts = new ArrayList<>();
 
         for (LottoRank rank : ranks) {
             long matchCount = lottoRanks.stream()
                     .filter(lottoRank -> lottoRank == rank)
                     .count();
             if (rank.getPrizeMoney() > LottoRank.FAIL.getPrizeMoney()) {
-                boolean bonusCheck = rank == LottoRank.SECOND;
-                winningPapers.add(new WinningPaperDto(
-                        rank.getMatchCount(),
-                        rank.getPrizeMoney(),
-                        (int) matchCount,
-                        bonusCheck)
-                );
+                lottoRankCounts.add(new LottoRankCount(rank, (int) matchCount));
             }
         }
-        Collections.reverse(winningPapers);
-        return winningPapers;
+        Collections.reverse(lottoRankCounts);
+        return lottoRankCounts;
     }
 }
