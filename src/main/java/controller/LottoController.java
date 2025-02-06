@@ -14,9 +14,9 @@ import model.LottoRankCollection;
 import model.LottoRankCount;
 import model.WinningInformation;
 import model.WinningNumber;
-import model.dto.WinningPaperDto;
 import view.InputView;
 import view.OutputView;
+import view.dto.WinningPaperDto;
 
 public class LottoController {
 

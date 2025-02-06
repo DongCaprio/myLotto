@@ -1,4 +1,4 @@
-package model.dto;
+package view.dto;
 
 import java.util.List;
 import model.LottoRank;

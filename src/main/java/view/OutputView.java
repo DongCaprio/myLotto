@@ -1,7 +1,7 @@
 package view;
 
 import java.util.List;
-import model.dto.WinningPaperDto;
+import view.dto.WinningPaperDto;
 
 public class OutputView {
 
