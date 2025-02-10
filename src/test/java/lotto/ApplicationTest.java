@@ -1,13 +1,14 @@
 package lotto;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import camp.nextstep.edu.missionutils.test.NsTest;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
@@ -48,14 +49,28 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 예외_테스트() {
-        assertSimpleTest(() -> {
+        assertThrows(RuntimeException.class, () -> {
             runException("1000j");
-            assertThat(output()).contains(ERROR_MESSAGE);
         });
+        assertThat(output()).contains(ERROR_MESSAGE);
     }
 
     @Override
     public void runMain() {
-        Application.main(new String[]{});
+        //Application.main(new String[]{});
+        String[] args = new String[]{};
+        Class<?> clazz;
+        Method mainMethod;
+
+        try {
+            clazz = ClassLoader.getSystemClassLoader()
+                    .loadClass("Application");
+            mainMethod = clazz.getMethod("main", String[].class);
+            mainMethod.invoke(null, (Object) args);
+        } catch (ClassNotFoundException | NoSuchMethodException e) {
+            throw new RuntimeException("Application 클래스를 찾을 수 없습니다", e);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException("Application 실행 중 오류 발생", e);
+        }
     }
 }
